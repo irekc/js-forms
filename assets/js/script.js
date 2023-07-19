@@ -59,6 +59,7 @@ function getArrayWithTrips(text) {
 
 function changeArrayTripToObject(array) {
     const object = {
+        id: array[0],
         title: array[1],
         description: array[2],
         adultPrice: array[3],
@@ -78,7 +79,8 @@ function createNewExcursion(trip) {
     const description = newExcursion.querySelector('.excursions__description')
     const adultPrice = newExcursion.querySelector('.excursions__price--adult')
     const childrenPrice = newExcursion.querySelector('.excursions__price--children')
-
+    
+    newExcursion.dataset.id = trip.id;
     title.innerText = trip.title
     description.innerText = trip.description
     adultPrice.innerText = trip.adultPrice
