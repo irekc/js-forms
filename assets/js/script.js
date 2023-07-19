@@ -5,36 +5,43 @@ console.log( txt.split(/[\r\n]+/gm) );
 
 document.addEventListener('DOMContentLoaded', init);
 
+const basket = [];
+
 function init() {
 
     const uploaderInput = document.querySelector('.uploader__input');
+    const panelExcursions = document.querySelector('.panel__excursions');
+
     if(uploaderInput) {
         uploaderInput.addEventListener('change', uploadHandler);
+    }
+
+    if(panelExcursions) {
+        panelExcursions.addEventListener('submit', checkDataInExcursionHandler)
     }
 }
 
 function uploadHandler(e) {
     const file = e.target.files[0];
-
-    if(file) {
+    
+    if(file && file.type.includes('text/csv')) {
         const reader = new FileReader();
 
         reader.onload = function(readerEvent) {
             const text = readerEvent.target.result;
             
-        const arrayWithTrips = getArrayWithTrips(text)
-        const excursionsPanel = document.querySelector('.panel__excursions');
-        
-        arrayWithTrips.forEach( trip => {
-            const newExcursion = createNewExcursion(trip)
-            excursionsPanel.appendChild(newExcursion);
-        })
+            const arrayWithTrips = getArrayWithTrips(text)
+            const excursionsPanel = document.querySelector('.panel__excursions');
             
-           
-        
+            arrayWithTrips.forEach( trip => {
+                const newExcursion = createNewExcursion(trip)
+                excursionsPanel.appendChild(newExcursion);
+            })
         }
 
-        reader.readAsText(file)
+        reader.readAsText(file, 'UTF-8')
+    } else {
+        alert('wybierz plik .csv')
     }
 
 }
@@ -87,4 +94,34 @@ function createNewExcursion(trip) {
     childrenPrice.innerText = trip.childrenPrice
     
     return newExcursion
+}
+
+function checkDataInExcursionHandler(e) {
+    e.preventDefault()
+    const currentTrip = e.target;
+    const errors = [];
+    const errorsField = currentTrip.querySelector('.excursions__errors')
+    errorsField.innerHTML = '';
+    
+    const [adultInput, childrenInput] = currentTrip;
+    const numberOfAdult = adultInput.value;
+    const numberOfChildren = childrenInput.value;
+    const childrenPrice = currentTrip.querySelector('.excursions__price--children').innerText;
+    const adultPrice = currentTrip.querySelector('.excursions__price--adult').innerText;
+    
+    if((numberOfAdult.length === 0) && (numberOfChildren.length === 0)) {
+        errors.push('jedno z pól musi być uzupełnione')
+    }
+    
+    if(isNaN(numberOfAdult) || isNaN(numberOfChildren)) {
+        errors.push('wprowadzone dane muszą być cyfrą')
+    }
+    
+    if(errors.length > 0 && errorsField) {
+        const errorsValue = errors.join(' i ')
+        
+        const newP = document.createElement('p');
+        newP.innerText = errorsValue;
+        errorsField.appendChild(newP)
+    }
 }

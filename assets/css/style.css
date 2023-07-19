@@ -19,10 +19,6 @@ ul {
     width: 70%;
 }
 
-.excursions__item--prototype {
-    display: none;
-}
-
 .excursions {
     display: flex;
     flex-wrap: wrap;
@@ -34,6 +30,14 @@ ul {
     margin: 10px;
     padding: 20px;
     width: calc(50% - 20px);
+}
+
+.excursions__item--prototype {
+    display: none;
+}
+
+.excursions__errors {
+    color: red;
 }
 
 .panel__form {
