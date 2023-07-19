@@ -19,6 +19,10 @@ ul {
     width: 70%;
 }
 
+.excursions__item--prototype {
+    display: none;
+}
+
 .excursions {
     display: flex;
     flex-wrap: wrap;
