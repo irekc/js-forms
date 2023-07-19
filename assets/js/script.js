@@ -102,18 +102,18 @@ function checkDataInExcursionHandler(e) {
     const errors = [];
     const errorsField = currentTrip.querySelector('.excursions__errors')
     errorsField.innerHTML = '';
-    
+
+    const tripObj = getTripObjToBasket(currentTrip);
+    console.log(tripObj)
+
+    const {adultNumber, childNumber} = tripObj;
     const [adultInput, childrenInput] = currentTrip;
-    const numberOfAdult = adultInput.value;
-    const numberOfChildren = childrenInput.value;
-    const childrenPrice = currentTrip.querySelector('.excursions__price--children').innerText;
-    const adultPrice = currentTrip.querySelector('.excursions__price--adult').innerText;
     
-    if((numberOfAdult.length === 0) && (numberOfChildren.length === 0)) {
+    if((adultNumber.length === 0) && (childNumber.length === 0)) {
         errors.push('jedno z pól musi być uzupełnione')
     }
     
-    if(isNaN(numberOfAdult) || isNaN(numberOfChildren)) {
+    if(isNaN(adultNumber) || isNaN(childNumber)) {
         errors.push('wprowadzone dane muszą być cyfrą')
     }
     
@@ -123,5 +123,27 @@ function checkDataInExcursionHandler(e) {
         const newP = document.createElement('p');
         newP.innerText = errorsValue;
         errorsField.appendChild(newP)
+    } else {
+        basket.push(tripObj);
+        adultInput.value = '';
+        childrenInput.value = '';
+    }
+}
+
+function getTripObjToBasket(tripEl) {
+    const excursionsItem = tripEl.closest('.excursions__item');
+    const title = excursionsItem.querySelector('.excursions__title').innerText;
+    const [adultInput, childrenInput] = tripEl;
+    const numberOfAdult = adultInput.value;
+    const numberOfChildren = childrenInput.value;
+    const childrenPrice = tripEl.querySelector('.excursions__price--children').innerText;
+    const adultPrice = tripEl.querySelector('.excursions__price--adult').innerText;
+
+    return trip = {
+        title: title,
+        adultNumber: numberOfAdult,
+        adultPice: adultPrice,
+        childNumber: numberOfChildren,
+        childPrice: childrenPrice
     }
 }
