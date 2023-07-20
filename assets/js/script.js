@@ -150,3 +150,22 @@ function getTripObjToBasket(tripEl) {
         childPrice: childrenPrice
     }
 }
+
+function createItemInSummary(trip) {
+    const summaryItemPrototype = document.querySelector('.summary__item--prototype');
+    const newSummaryItem = summaryItemPrototype.cloneNode(true);
+
+    const sumTitleEl = newSummaryItem.querySelector('.summary__name')
+    const sumTotalPriceEl = newSummaryItem.querySelector('.summary__total-price')
+    const sumPricesEl = newSummaryItem.querySelector('.summary__prices')
+
+    const {title, adultNumber, adultPice, childNumber, childPrice} = trip
+    const sumTotalPrice = adultNumber*adultPice + childNumber*childPrice
+
+    sumTitleEl.innerText = title;
+    sumTotalPriceEl.innerText = sumTotalPrice;
+    sumPricesEl.innerText = `dorośli: ${adultNumber} x ${adultPice}PLN, dzieci: ${childNumber} x ${childPrice}PLN`;
+
+    return newSummaryItem
+}
+
