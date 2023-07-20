@@ -11,6 +11,7 @@ function init() {
 
     const uploaderInput = document.querySelector('.uploader__input');
     const panelExcursions = document.querySelector('.panel__excursions');
+    
 
     if(uploaderInput) {
         uploaderInput.addEventListener('change', uploadHandler);
@@ -138,12 +139,14 @@ function getTripObjToBasket(tripEl) {
     const numberOfChildren = childrenInput.value;
     const childrenPrice = tripEl.querySelector('.excursions__price--children').innerText;
     const adultPrice = tripEl.querySelector('.excursions__price--adult').innerText;
+    console.log(numberOfAdult, numberOfChildren)
+    
 
     return trip = {
         title: title,
-        adultNumber: numberOfAdult,
+        adultNumber: numberOfAdult ? numberOfAdult : '0',
         adultPice: adultPrice,
-        childNumber: numberOfChildren,
+        childNumber: numberOfChildren ? numberOfChildren : '0',
         childPrice: childrenPrice
     }
 }
