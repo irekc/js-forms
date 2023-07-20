@@ -128,6 +128,7 @@ function checkDataInExcursionHandler(e) {
         basket.push(tripObj);
         adultInput.value = '';
         childrenInput.value = '';
+        summaryItemsRender(basket)
     }
 }
 
@@ -166,6 +167,29 @@ function createItemInSummary(trip) {
     sumTotalPriceEl.innerText = sumTotalPrice;
     sumPricesEl.innerText = `dorośli: ${adultNumber} x ${adultPice}PLN, dzieci: ${childNumber} x ${childPrice}PLN`;
 
-    return newSummaryItem
+    return {
+       summaryItem: newSummaryItem,
+       sum: sumTotalPrice
+    }
 }
 
+function summaryItemsRender(basket) {
+    const panelSummaryEl = document.querySelector('.panel__summary');
+    const orderTotalEl = document.querySelector('.order__total-price-value');
+    const summaryItemProtEl = document.querySelector('.summary__item--prototype')
+
+    let totalSum = 0;
+    panelSummaryEl.innerHTML = '';
+    panelSummaryEl.appendChild(summaryItemProtEl)
+
+
+    basket.forEach(trip => {
+        const {summaryItem, sum} = createItemInSummary(trip);
+        
+        totalSum += sum;
+        panelSummaryEl.appendChild(summaryItem)
+
+    })
+
+    orderTotalEl.innerText = `${totalSum}PLN`
+}
