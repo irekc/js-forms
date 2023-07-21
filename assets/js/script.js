@@ -105,7 +105,6 @@ function checkDataInExcursionHandler(e) {
     errorsField.innerHTML = '';
 
     const tripObj = getTripObjToBasket(currentTrip);
-    console.log(tripObj)
 
     const {adultNumber, childNumber} = tripObj;
     const [adultInput, childrenInput] = currentTrip;
@@ -141,7 +140,6 @@ function getTripObjToBasket(tripEl) {
     const numberOfChildren = childrenInput.value;
     const childrenPrice = tripEl.querySelector('.excursions__price--children').innerText;
     const adultPrice = tripEl.querySelector('.excursions__price--adult').innerText;
-    console.log(numberOfAdult, numberOfChildren)
     
 
     return trip = {
@@ -153,25 +151,40 @@ function getTripObjToBasket(tripEl) {
     }
 }
 
-function createItemInSummary(trip) {
+function createItemInSummary(trip, index) {
     const summaryItemPrototype = document.querySelector('.summary__item--prototype');
     const newSummaryItem = summaryItemPrototype.cloneNode(true);
 
     const sumTitleEl = newSummaryItem.querySelector('.summary__name')
     const sumTotalPriceEl = newSummaryItem.querySelector('.summary__total-price')
     const sumPricesEl = newSummaryItem.querySelector('.summary__prices')
+    const removeButton = newSummaryItem.querySelector('.summary__btn-remove')
 
     const {title, adultNumber, adultPice, childNumber, childPrice} = trip
     const sumTotalPrice = adultNumber*adultPice + childNumber*childPrice
 
     newSummaryItem.classList.remove('summary__item--prototype');
+    newSummaryItem.dataset.id = index;
     sumTitleEl.innerText = title;
     sumTotalPriceEl.innerText = sumTotalPrice;
     sumPricesEl.innerText = `dorośli: ${adultNumber} x ${adultPice}PLN, dzieci: ${childNumber} x ${childPrice}PLN`;
+    removeButton.addEventListener('click', removeItemInSummary)
 
     return {
        summaryItem: newSummaryItem,
        sum: sumTotalPrice
+    }
+}
+
+function removeItemInSummary(e) {
+    e.preventDefault()
+
+    const summaryItem = e.target.closest('.summary__item');
+    const index = summaryItem.dataset.id;
+
+    if(summaryItem) {
+        basket.splice(index, 1);
+        summaryItemsRender(basket)
     }
 }
 
@@ -185,8 +198,8 @@ function summaryItemsRender(basket) {
     panelSummaryEl.appendChild(summaryItemProtEl)
 
 
-    basket.forEach(trip => {
-        const {summaryItem, sum} = createItemInSummary(trip);
+    basket.forEach((trip, index) => {
+        const {summaryItem, sum} = createItemInSummary(trip, index);
         
         totalSum += sum;
         panelSummaryEl.appendChild(summaryItem)
