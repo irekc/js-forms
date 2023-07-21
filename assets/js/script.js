@@ -110,7 +110,8 @@ function checkDataInExcursionHandler(e) {
     const {adultNumber, childNumber} = tripObj;
     const [adultInput, childrenInput] = currentTrip;
     
-    if((adultNumber.length === 0) && (childNumber.length === 0)) {
+    
+    if((adultNumber === '0') && (childNumber === '0')) {
         errors.push('jedno z pól musi być uzupełnione')
     }
     
@@ -163,6 +164,7 @@ function createItemInSummary(trip) {
     const {title, adultNumber, adultPice, childNumber, childPrice} = trip
     const sumTotalPrice = adultNumber*adultPice + childNumber*childPrice
 
+    newSummaryItem.classList.remove('summary__item--prototype');
     sumTitleEl.innerText = title;
     sumTotalPriceEl.innerText = sumTotalPrice;
     sumPricesEl.innerText = `dorośli: ${adultNumber} x ${adultPice}PLN, dzieci: ${childNumber} x ${childPrice}PLN`;
