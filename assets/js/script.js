@@ -11,6 +11,7 @@ function init() {
 
     const uploaderInput = document.querySelector('.uploader__input');
     const panelExcursions = document.querySelector('.panel__excursions');
+    const panelOrder = document.querySelector('.panel__order');
     
 
     if(uploaderInput) {
@@ -19,6 +20,10 @@ function init() {
 
     if(panelExcursions) {
         panelExcursions.addEventListener('submit', checkDataInExcursionHandler)
+    }
+
+    if(panelOrder) {
+        panelOrder.addEventListener('submit', orderHandler)
     }
 }
 
@@ -119,11 +124,8 @@ function checkDataInExcursionHandler(e) {
     }
     
     if(errors.length > 0 && errorsField) {
-        const errorsValue = errors.join(' i ')
+        errorsRender(errorsField, errors)
         
-        const newP = document.createElement('p');
-        newP.innerText = errorsValue;
-        errorsField.appendChild(newP)
     } else {
         basket.push(tripObj);
         adultInput.value = '';
@@ -207,4 +209,45 @@ function summaryItemsRender(basket) {
     })
 
     orderTotalEl.innerText = `${totalSum}PLN`
+}
+
+function orderHandler(e) {
+    
+    const orderPanel = e.target
+    const [nameEl, emailEl] = orderPanel;
+    const name = nameEl.value;
+    const email = emailEl.value
+    const errorsEl = orderPanel.querySelector('.order__field-errors');
+    const orderTotalPriceEl = orderPanel.querySelector('.order__total-price-value');
+    const errors = [];
+    errorsEl.innerHTML = '';
+
+    if(name === '' || email === '') {
+        errors.push('wszystkie pola muszą być uzupełnione')
+    }
+    
+    if(email.length > 0 && !email.includes('@')) {
+        errors.push('email musi zawierać "@"')
+    }
+    
+    if(orderTotalPriceEl.innerText === '0PLN') {
+        errors.push('proszę dodać wycieczki do koszyka')
+    }
+    
+    if(errors.length > 0 && errorsEl) {
+        e.preventDefault()
+        errorsRender(errorsEl, errors)
+    } else {
+        alert(`Dziękujemy za złożenie zamówienia o wartości ${orderTotalPriceEl.innerText}. Szczegóły zamówienia zostały wysłane na adres e-mail: ${email}`);
+        
+    }
+}
+
+
+function errorsRender(errorsEl, errorsArr) {
+    const errorsValue = errorsArr.join(' / ')
+        
+        const newP = document.createElement('p');
+        newP.innerText = errorsValue;
+        errorsEl.appendChild(newP)
 }
