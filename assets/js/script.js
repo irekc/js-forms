@@ -1,8 +1,3 @@
-const txt = `"1","Ogrodzieniec","Zamek Ogrodzieniec – ruiny zamku leżącego na Jurze Krakowsko-Częstochowskiej, wybudowanego w systemie tzw. Orlich Gniazd, we wsi Podzamcze w województwie śląskim, w powiecie zawierciańskim, około 2 km na wschód od Ogrodzieńca. Zamek został wybudowany w XIV – XV w. przez ród Włodków Sulimczyków.","99PLN","50PLN"
-"2","Ojców","wieś w województwie małopolskim, w powiecie krakowskim, w gminie Skała, na terenie Wyżyny Krakowsko-Częstochowskiej, w Dolinie Prądnika, na Szlaku Orlich Gniazd. W Królestwie Polskim istniała gmina Ojców. W latach 1975–1998 miejscowość położona była w województwie krakowskim. W latach 1928–1966 Ojców miał status uzdrowiska posiadającego charakter użyteczności publicznej.","40PLN","15PLN`;
-
-console.log( txt.split(/[\r\n]+/gm) );
-
 document.addEventListener('DOMContentLoaded', init);
 
 const basket = [];
@@ -116,11 +111,11 @@ function checkDataInExcursionHandler(e) {
     
     
     if((adultNumber === '0') && (childNumber === '0')) {
-        errors.push('jedno z pól musi być uzupełnione')
+        errors.push('przynajmniej jedno z pól musi być uzupełnione')
     }
     
     if(isNaN(adultNumber) || isNaN(childNumber)) {
-        errors.push('wprowadzone dane muszą być cyfrą')
+        errors.push('wprowadzone dane muszą być liczbą')
     }
     
     if(errors.length > 0 && errorsField) {
@@ -168,7 +163,7 @@ function createItemInSummary(trip, index) {
     newSummaryItem.classList.remove('summary__item--prototype');
     newSummaryItem.dataset.id = index;
     sumTitleEl.innerText = title;
-    sumTotalPriceEl.innerText = sumTotalPrice;
+    sumTotalPriceEl.innerText = sumTotalPrice + 'PLN';
     sumPricesEl.innerText = `dorośli: ${adultNumber} x ${adultPice}PLN, dzieci: ${childNumber} x ${childPrice}PLN`;
     removeButton.addEventListener('click', removeItemInSummary)
 
@@ -242,7 +237,6 @@ function orderHandler(e) {
         
     }
 }
-
 
 function errorsRender(errorsEl, errorsArr) {
     const errorsValue = errorsArr.join(' / ')

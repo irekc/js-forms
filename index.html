@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>JavaScript: Formularze - devmentor.pl</title>
+    <title>JavaScript: Formularze - Ireneusz Cisło</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
@@ -23,18 +26,18 @@
             <div class="excursions__field">
               <label class="excursions__field-name">
                 Dorosły: <span class="excursions__price excursions__price--adult">99</span>PLN x
-                <input class="excursions__field-input" name="adults" />
+                <input class="excursions__field-input input-field" name="adults" />
               </label>
             </div>
             <div class="excursions__field">
               <label class="excursions__field-name">
                 Dziecko: <span class="excursions__price excursions__price--children">50</span>PLN x
-                <input class="excursions__field-input" name="children" />
+                <input class="excursions__field-input input-field" name="children" />
               </label>
             </div>
             <div class="excursions__field excursions__field--submit">
               <input
-                class="excursions__field-input excursions__field-input--submit"
+                class="excursions__field-input excursions__field-input--submit button"
                 value="dodaj do zamówinia"
                 type="submit"
               />
@@ -47,7 +50,7 @@
         <div class="panel__uploader uploader">
           <label class="uploader__label">
             Wybierz plik do wczytania wycieczek:
-            <input class="uploader__input" type="file" accept=".csv" />
+            <input class="uploader__input button" type="file" accept=".csv" />
           </label>
         </div>
         <form class="panel__order order" novalidate>
@@ -57,17 +60,17 @@
           </div>
           <div class="order__field">
             <label class="order__field-name">
-              Imię i nazwisko: <input class="order__field-input" name="name" />
+              Imię i nazwisko: <input class="order__field-input input-field" name="name" />
             </label>
           </div>
           <div class="order__field">
             <label class="order__field-name">
-              Email <input class="order__field-input" name="email" />
+              Email <input class="order__field-input input-field" name="email" />
             </label>
           </div>
           <div class="order__field order__field--submit">
             <input
-              class="order__field-input order__field-submit"
+              class="order__field-input order__field-submit button"
               value="zamawiam"
               type="submit"
             />
@@ -79,7 +82,7 @@
             <h3 class="summary__title">
               <span class="summary__name">Ogrodzieniec</span>
               <strong class="summary__total-price">199PLN</strong>
-              <a href="" class="summary__btn-remove" title="usuń">X</a>
+              <a href="" class="summary__btn-remove" title="usuń">[X]</a>
             </h3>
             <p class="summary__prices">dorośli: 1 x 99PLN, dzieci: 2 x 50PLN</p>
           </li>

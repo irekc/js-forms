@@ -4,19 +4,29 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    font-size: 1.2rem;
+
+}
+
 ul {
     list-style: none;
 }
 
 .panel {
     display: flex;
+    flex-direction: column-reverse;
     margin: 0 auto;
     max-width: 1200px;
-    padding: 30px 0;
+    /* padding: 30px 0; */
 }
 
+/* PANEL EXCURSIONS START */
+
 .panel__excursions {
-    width: 70%;
+    /* width: 70%; */
 }
 
 .excursions {
@@ -24,26 +34,46 @@ ul {
     flex-wrap: wrap;
 }
 
+.excursions__description {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 .excursions__item {
-    border: 1px solid #bbb;
+    /* border: 1px solid #bbb; */
     border-radius: 5px;
     margin: 10px;
     padding: 20px;
-    width: calc(50% - 20px);
+    width: 100%;
+    box-shadow: 2px 4px 11px -4px rgba(66, 68, 90, 1);
+    /* width: calc(50% - 20px); */
 }
 
 .excursions__item--prototype {
     display: none;
 }
 
-.errors {
-    color: red;
+/* PANEL EXCURSIONS END */
+
+/* PANEL FORM START */
+
+.order__total-price {
+    font-weight: bold;
+    padding: 1rem;
+    margin: 0 auto;
+    background-color: #acacac;
+}
+
+.input-field {
+    width: 100%;
+    height: 1.5rem ;
+    margin-bottom: 0.5rem;
 }
 
 .panel__form {
     background-color: #f4f4f4;
     padding: 20px;
-    width: 30%;
+    /* width: 30%; */
 }
 
 .uploader, .order {
@@ -52,6 +82,61 @@ ul {
     padding-bottom: 20px;
 }
 
+.uploader__label {
+    height: 100px;
+
+}
+
+.summary__btn-remove {
+    text-decoration: none;
+    color: #ff5353;
+}
+
 .summary__item--prototype {
     display: none;
+}
+
+/* PANEL FORM END */
+
+.button {
+    align-items: center;
+    appearance: button;
+    background-color: #0276FF;
+    border-radius: 8px;
+    border-style: none;
+    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    /* line-height: 1.15; */
+    margin: 0;
+    padding: 10px 21px;
+    text-align: center;
+    text-transform: none;
+    transition: color .13s ease-in-out,background-color .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+    width: 100%;
+}
+  
+.button:active {
+    background-color: #006AE8;
+}
+
+.button:hover {
+    background-color: #1C84FF;
+}
+
+.errors {
+    font-size: 0.8rem;
+    color: red;
+    height: 1.6rem;
+}
+
+
+@media (min-width: 601px) {
+    
+}
+
+@media (min-width: 1281px) {
+    
 }
