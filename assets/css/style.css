@@ -34,13 +34,11 @@ ul {
 }
 
 .excursions__item {
-    /* border: 1px solid #bbb; */
     border-radius: 5px;
     margin: 10px;
     padding: 20px;
     width: 100%;
     box-shadow: 2px 4px 11px -4px rgba(66, 68, 90, 1);
-    /* width: calc(50% - 20px); */
 }
 
 .excursions__item--prototype {
